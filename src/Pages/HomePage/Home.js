@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
         const navigate = useNavigate();
-
+        const currentUser = localStorage.getItem('user');
+        console.log(currentUser);
+        useEffect(() => {
+                if (currentUser) {
+                        navigate('/profile')
+                }
+        }, [currentUser]);
         // Handle Registration Form:
         const [passwordError, setPasswordError] = useState('');
         const [emailError, setEmailError] = useState('');
@@ -72,7 +78,7 @@ const Home = () => {
                                                                 <h3 className="text-red-600 pl-2">{emailError ? emailError : ''}</h3>
                                                                 <input type="password" name="password" placeholder="Your Password" className="input input-bordered w-full max-w-xs mt-4" required />
                                                                 <h3 className="text-red-600 pl-2">{passwordError ? passwordError : ''}</h3>
-                                                                <input type="submit" value="Login" className="btn input-bordered w-full max-w-xs mt-4" />
+                                                                <input type="submit" value="Login" className="btn input-bordered btn-success bg-black text-white fw-bold w-full max-w-xs mt-4" />
                                                                 <h3 className="text-red-600 pl-2">{userNotFound ? userNotFound : ''}</h3>
                                                         </form>
                                                 </div>

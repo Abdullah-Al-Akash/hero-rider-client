@@ -7,6 +7,8 @@ import JoinAsRider from './Pages/JoinAsRider/JoinAsRider';
 import JoinAsLearner from './Pages/JoinAsLearner/JoinAsLearner';
 import { ToastContainer, } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from './Pages/Profile/Profile';
+
 
 function App() {
   return (
@@ -17,6 +19,11 @@ function App() {
         }></Route>
         <Route path="/rider" element={<JoinAsRider></JoinAsRider>}></Route>
         <Route path="/learner" element={<JoinAsLearner></JoinAsLearner>}></Route>
+        <Route path="/profile" element={
+
+          <Profile></Profile>
+
+        }></Route>
       </Routes>
       <ToastContainer
         position="top-center"

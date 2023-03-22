@@ -89,7 +89,7 @@ const JoinAsRider = () => {
                                                 if (result.acknowledged) {
 
                                                         toast.success("Registration Successfully Done!");
-
+                                                        localStorage.setItem('user', email)
 
                                                 }
                                                 else {
@@ -113,8 +113,8 @@ const JoinAsRider = () => {
                 navigate('/')
         }
         return (
-                <div className="flex justify-center items-center mt-16 pb-16">
-                        <div className="card w-90 bg-base-100 shadow-xl pt-4 pb-8">
+                <div className="flex form-bg justify-center items-center pt-16 pb-16">
+                        <div className="card bg-yellow-100 w-90 bg-base-100 shadow-xl pt-4 pb-8">
                                 <div className="card-body">
                                         <h2 className="text-center font-bold text-3xl">Join as A Rider</h2> <br />
 
@@ -142,17 +142,17 @@ const JoinAsRider = () => {
                                                 <input type="password" name="password" placeholder="Password" className="input input-bordered w-full max-w-xs mt-4 w-96" required />
                                                 <input type="password" name="confirmPassword" placeholder="Confirm Password" className="input input-bordered w-full max-w-xs mt-4 ms-4" required />
                                                 <h3 className="text-red-600 pl-2">{passwordError ? passwordError : ''}</h3>
-                                                <input type="submit" value="Registration as a Rider" className="btn input-bordered w-full max-w mt-4" />
+                                                <input type="submit" value="Registration as a Rider" className="btn input-bordered w-full max-w mt-4 bg-dark text-white" />
 
                                         </form>
                                 </div>
-                                <div className="pl-8 pb-12">
+                                <div className="pl-8 pb-3 text-center">
                                         <h3>Want to be Learner? Please <span
                                                 onClick={() => navigateToLearner()}
                                                 className="text-orange-700 font-bold cursor-pointer"
                                         >Registration as a Learner</span></h3>
                                 </div>
-                                <div className="pl-8 pb-12">
+                                <div className="pl-8 pb-12 text-center">
                                         <h3>Want to Login? Please <span
                                                 onClick={() => navigateToLogin()}
                                                 className="text-orange-700 font-bold cursor-pointer"

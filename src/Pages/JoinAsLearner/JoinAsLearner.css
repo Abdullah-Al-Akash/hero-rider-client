@@ -1,0 +1,8 @@
+.form-bg{
+        min-height:100%;
+      background:linear-gradient(0deg, rgba(23, 23, 23, 0.784), rgba(18, 17, 17, 0.488)), url(https://t3.ftcdn.net/jpg/03/67/96/46/360_F_367964620_Cy8mzjnwJAXHjrOWgUXkug3pAkaPVe0Y.jpg);
+      background-size:cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+}
