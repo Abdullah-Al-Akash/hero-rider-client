@@ -67,7 +67,10 @@ const JoinAsLearner = () => {
                                         phone: phone,
                                         vehicle: vehicle,
                                         image: imgData?.data?.url,
-                                        profileType: 'learner'
+                                        profileType: 'learner',
+                                        carName: '',
+                                        carModel: '',
+                                        palateNumber: ''
                                 }
                                 console.log(member);
                                 const url = 'http://localhost:5000/registration';
@@ -84,7 +87,8 @@ const JoinAsLearner = () => {
                                                 if (result.acknowledged) {
 
                                                         toast.success("Registration Successfully Done!");
-                                                        localStorage.setItem('user', email)
+                                                        localStorage.setItem('user', email);
+                                                        navigate('/profile');
 
                                                 }
                                                 else {

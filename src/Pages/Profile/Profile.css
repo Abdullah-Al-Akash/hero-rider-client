@@ -1,0 +1,8 @@
+.profile-bg{
+                min-height:100%;
+              background:linear-gradient(0deg, rgba(23, 23, 23, 0.871), rgba(18, 17, 17, 0.882)), url(https://privacyinternational.org/sites/default/files/2021-12/Moving_Car_Moving_Background_0.gif);
+              background-size:cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+}

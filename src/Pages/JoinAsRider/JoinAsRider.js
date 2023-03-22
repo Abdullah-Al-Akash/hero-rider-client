@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const JoinAsRider = () => {
+        const navigate = useNavigate();
         const imageHostKey = '4183cea48c4e5701d0cdbb24c4c45488';
         // Handle Registration Form:
         const [passwordError, setPasswordError] = useState('');
@@ -90,6 +91,7 @@ const JoinAsRider = () => {
 
                                                         toast.success("Registration Successfully Done!");
                                                         localStorage.setItem('user', email)
+                                                        navigate('/profile');
 
                                                 }
                                                 else {
@@ -104,7 +106,6 @@ const JoinAsRider = () => {
                 setEmailError('')
         }
         // Navigate To Learner:
-        const navigate = useNavigate();
         const navigateToLearner = () => {
                 navigate('/learner')
         }
