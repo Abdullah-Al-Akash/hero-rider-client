@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const JoinAsLearner = () => {
@@ -30,6 +31,17 @@ const JoinAsLearner = () => {
                 let phone = e.target.phone.value;
                 let vehicle = carType;
 
+
+                // Error Handling:
+                if (!/^[0-9]{6}$/.test(password)) {
+                        setPasswordError('Password Must be 6 digit number!')
+                        return;
+                }
+                if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+                        setEmailError("Enter Valid Email!")
+                        return;
+                }
+
                 if (password !== confirmPassword) {
                         return toast.error("Password didn't match");
                 }
@@ -53,7 +65,8 @@ const JoinAsLearner = () => {
                                         age: age,
                                         phone: phone,
                                         vehicle: vehicle,
-                                        image: imgData?.data?.url
+                                        image: imgData?.data?.url,
+                                        profileType: 'learner'
                                 }
                                 console.log(member);
                                 const url = 'http://localhost:5000/registration';
@@ -81,38 +94,28 @@ const JoinAsLearner = () => {
                         })
 
 
-
-
-
-
-
-                // Error Handling:
-                if (!/^[0-9]{6}$/.test(password)) {
-                        setPasswordError('Password Must be 6 digit number!')
-                        return;
-                }
-                if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-                        setEmailError("Enter Valid Email!")
-                        return;
-                }
-
-
-
                 setPasswordError('');
                 setEmailError('')
         }
+
+        // Navigate To Login:
+        const navigate = useNavigate();
+        const navigateToRider = () => {
+                navigate('/rider')
+        }
         return (
-                <div className="flex justify-center items-center mt-8 pb-8">
-                        <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="flex justify-center items-center mt-16 pb-16">
+                        <div className="card w-90 bg-base-100 shadow-xl pt-4 pb-8">
                                 <div className="card-body">
-                                        <h2 className="text-center font-bold text-2xl">Please Complete The Form</h2>
+                                        <h2 className="text-center font-bold text-3xl">Join as a Driving Lesson Learner</h2> <br />
+
                                         <form onSubmit={handleLearner}>
-                                                <input type="text" name="name" placeholder="Your Name" className="input input-bordered w-full max-w-xs mt-8" required />
-                                                <input type="email" name="email" placeholder="Your Email" className="input input-bordered w-full max-w-xs mt-4" required />
+                                                <input type="text" name="name" placeholder="Your Name" className="input input-bordered w-96 max-w-xs mt-8" required />
+                                                <input type="email" name="email" placeholder="Your Email" className="input input-bordered w-full max-w-xs mt-4 ms-4" required />
                                                 <h3 className="text-red-600 pl-2">{emailError ? emailError : ''}</h3>
 
-                                                <input type="number" name="age" placeholder="Your Age" className="input input-bordered w-full max-w-xs mt-8" required />
-                                                <input type="text" name="address" placeholder="Your Address" className="input input-bordered w-full max-w-xs mt-8" required />
+                                                <input type="number" name="age" placeholder="Your Age" className="input input-bordered w-full max-w-xs mt-8 w-96" required />
+                                                <input type="text" name="address" placeholder="Your Address" className="input input-bordered w-full max-w-xs mt-8 ms-4" required />
                                                 <input type="text" name="phone" placeholder="Your Phone Number" className="input input-bordered w-full max-w-xs mt-8" required />
                                                 <h3 className='pt-3 fw-bold'>Your Profile Picture:</h3>
                                                 <input type="file" onChange={handleProfilePic} placeholder="Your Profile Picture" className=" max-w-xs mt-2" required />
@@ -123,12 +126,18 @@ const JoinAsLearner = () => {
                                                         <option value="car">Car</option>
                                                         <option value="bike">Bike</option>
                                                 </select>
-                                                <input type="password" name="password" placeholder="Password" className="input input-bordered w-full max-w-xs mt-4" required />
-                                                <input type="password" name="confirmPassword" placeholder="Confirm Password" className="input input-bordered w-full max-w-xs mt-4" required />
+                                                <input type="password" name="password" placeholder="Password" className="input input-bordered w-full max-w-xs mt-4 w-96" required />
+                                                <input type="password" name="confirmPassword" placeholder="Confirm Password" className="input input-bordered w-full max-w-xs mt-4 ms-4" required />
                                                 <h3 className="text-red-600 pl-2">{passwordError ? passwordError : ''}</h3>
-                                                <input type="submit" value="Registration" className="btn input-bordered w-full max-w-xs mt-4" />
+                                                <input type="submit" value="Registration as a Learner" className="btn input-bordered w-full max-w mt-4" />
 
                                         </form>
+                                </div>
+                                <div className="pl-8 pb-12">
+                                        <h3>Want to be Rider? Please <span
+                                                onClick={() => navigateToRider()}
+                                                className="text-orange-700 font-bold cursor-pointer"
+                                        >Registration as a Rider</span></h3>
                                 </div>
                         </div>
                 </div>
