@@ -98,10 +98,14 @@ const JoinAsLearner = () => {
                 setEmailError('')
         }
 
-        // Navigate To Login:
+        // Navigate To Rider:
         const navigate = useNavigate();
         const navigateToRider = () => {
                 navigate('/rider')
+        }
+        // Navigate To Login:
+        const navigateToLogin = () => {
+                navigate('/')
         }
         return (
                 <div className="flex justify-center items-center mt-16 pb-16">
@@ -138,6 +142,13 @@ const JoinAsLearner = () => {
                                                 onClick={() => navigateToRider()}
                                                 className="text-orange-700 font-bold cursor-pointer"
                                         >Registration as a Rider</span></h3>
+                                </div>
+
+                                <div className="pl-8 pb-12">
+                                        <h3>Want to Login? Please <span
+                                                onClick={() => navigateToLogin()}
+                                                className="text-orange-700 font-bold cursor-pointer"
+                                        >Click Here</span></h3>
                                 </div>
                         </div>
                 </div>
