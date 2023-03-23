@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import handleActive from './Active';
+
 
 const Users = () => {
         const [members, setMembers] = useState([]);
         // Handle Active:
-        const active = handleActive;
-        const navigate = useNavigate()
+
         useEffect(() => {
                 fetch('https://hero-rider-server-nine.vercel.app/members', {
                         method: 'GET'
@@ -21,7 +19,7 @@ const Users = () => {
                                 setMembers(data)
                         })
         }, [])
-        return [members, active];
+        return [members];
 };
 
 export default Users;

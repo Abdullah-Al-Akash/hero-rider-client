@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Users from '../hooks/Users';
 import TableR from './TableR';
+import './Admin.css';
 
 const Admin = () => {
-        const [members, setMembers] = useState([])
+        const [members] = Users()
+        const [user, setUser] = useState([])
         const [pageCount, setPageCount] = useState(0);
         const [currentPage, setCurrentPage] = useState(0);
         const [size, setSize] = useState(10);
@@ -11,12 +13,13 @@ const Admin = () => {
                 fetch(`https://hero-rider-server-nine.vercel.app/members?page=${currentPage}&size=${size}`)
                         .then(res => res.json())
                         .then(data => {
-                                setMembers(data);
-                                const count = data.count;
+                                setUser(data);
+                                const count = members.length;
+                                console.log(count);
                                 const pages = Math.ceil(count / 10);
                                 setPageCount(pages);
                         })
-        }, [members]);
+        }, [user]);
         return (
                 <div>
                         <div className="container mx-auto px-8 pt-4">
@@ -38,7 +41,7 @@ const Admin = () => {
 
                                                 <tbody>
                                                         {
-                                                                members?.map(member => <TableR
+                                                                user?.map(member => <TableR
                                                                         key={member._id}
                                                                         member={member}
 
@@ -50,6 +53,17 @@ const Admin = () => {
                                         </table>
 
                                 </div>
+                        </div>
+                        <div className="text-center mt-12 mb-12">
+                                {
+                                        [...Array(pageCount).keys()].map(number => <button
+                                                key={number}
+                                                onClick={() => setCurrentPage(number)}
+                                                className={`btn fw-bold ms-2 ${currentPage === number ? 'selected' : 'bg-white text-dark'}`}
+                                        >
+                                                {number + 1}
+                                        </button>)
+                                }
                         </div>
                 </div>
         );
