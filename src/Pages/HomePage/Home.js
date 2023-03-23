@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import Users from '../hooks/Users';
 import './Home.css';
 
 const Home = () => {
+        const [members] = Users();
         const navigate = useNavigate();
         const currentUser = localStorage.getItem('user');
         console.log(currentUser);
@@ -29,30 +32,29 @@ const Home = () => {
                         setEmailError("Enter Valid Email!")
                         return;
                 }
-                localStorage.setItem("user", email);
 
-                // fetch('https://power-hack-billing-backend.vercel.app/login', {
-                //         method: 'POST',
-                //         headers: {
-                //                 'content-type': 'application/json'
-                //         },
-                //         body: JSON.stringify({ email, password })
-                // })
-                //         .then(res => res.json())
-                //         .then(data => {
-                //                 if (data.success) {
-                //                         localStorage.setItem("token", data.accessToken);
-                //                         const currentUser = users?.find(user => user?.email === email && user?.password == password);
-                //                         // localStorage.setItem("user", currentUser?.email);
-                //                         toast.success("Successfully Login");
-                //                         navigate('/');
-                //                         setUserNotFound('')
-                //                 }
-                //                 else {
-                //                         toast.error("Something went wrong. Please try again!");
-                //                         setUserNotFound('User not found!')
-                //                 }
-                //         })
+                fetch('http://localhost:5000/login', {
+                        method: 'POST',
+                        headers: {
+                                'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({ email, password })
+                })
+                        .then(res => res.json())
+                        .then(data => {
+                                if (data.success) {
+                                        localStorage.setItem("user", email);
+                                        // const currentUser = members?.find(user => user?.email === email && user?.password == password);
+                                        // localStorage.setItem("user", currentUser?.email);
+                                        toast.success("Successfully Login");
+                                        navigate('/');
+                                        setUserNotFound('')
+                                }
+                                else {
+                                        toast.error("Something went wrong. Please try again!");
+                                        setUserNotFound('User not found!')
+                                }
+                        })
                 setPasswordError('');
                 setEmailError('')
         }

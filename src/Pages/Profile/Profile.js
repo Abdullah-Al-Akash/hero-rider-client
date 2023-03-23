@@ -4,7 +4,6 @@ import Users from '../hooks/Users';
 import './Profile.css'
 
 const Profile = () => {
-
         const navigate = useNavigate();
         const [members] = Users();
         console.log(members);
@@ -18,8 +17,18 @@ const Profile = () => {
         }, [members, currentUser]);
         console.log(cUser);
         const { name, email, _id, image, phone, carName, carModel, palateNumber, profileType, vehicle, age } = cUser ? cUser : '';
+
+        // Log Out Function:
+        const logout = () => {
+                localStorage.clear();
+                navigate('/');
+        }
         return (
                 <div className="pt-12 pb-8 profile-bg">
+                        {/* Log Out Option */}
+                        <div className='text-end mr-96'>
+                                <button onClick={logout} className='btn btn-warning fw-bold'>Log Out</button>
+                        </div>
                         <div>
                                 <div className="flex justify-center w-96 mx-auto">
                                         <marquee behavior="" direction="">
@@ -57,6 +66,18 @@ const Profile = () => {
                                 <div className='row'>
                                         <div className="col-md-3 mx-4">
 
+                                                <h3 className="fw-bold text-xl text-yellow-400">ID:</h3>
+
+                                        </div>
+                                        <div className="col-md-4 mx-2">
+                                                <h3 className="fw-bold text-xl text-white">{_id}</h3>
+                                        </div>
+                                </div>
+                        </div>
+                        <div className='w-76 mx-96 mt-6'>
+                                <div className='row'>
+                                        <div className="col-md-3 mx-4">
+
                                                 <h3 className="fw-bold text-xl text-yellow-400">Mobile:</h3>
 
                                         </div>
@@ -80,13 +101,13 @@ const Profile = () => {
                         <div className='w-76 mx-96 mt-6'>
                                 <div className="row">
                                         <div className="col-md-3 mx-4"> <h3 className="fw-bold text-xl text-yellow-400">Profile Type:</h3></div>
-                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-green-200 pt-1 pb-1 rounded-full">{profileType}</h3></div>
+                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-yellow-200 pt-1 pb-1 rounded-full">{profileType}</h3></div>
                                 </div>
                         </div>
                         <div className='w-76 mx-96 mt-6'>
                                 <div className="row">
                                         <div className="col-md-3 mx-4"> <h3 className="fw-bold text-xl text-yellow-400">Vehicle Type:</h3></div>
-                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-green-200 pt-1 pb-1 rounded-full">{vehicle}</h3></div>
+                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-yellow-200 pt-1 pb-1 rounded-full">{vehicle}</h3></div>
                                 </div>
                         </div>
                         {
@@ -95,15 +116,15 @@ const Profile = () => {
                                                 <h3 className='fw-bold text-2xl mx-6 text-center pb-4 underline  underline-offset-auto text-white'>Car Information</h3>
                                                 <div className="row mt-4">
                                                         <div className="col-md-3 mx-4"> <h3 className="fw-bold text-xl text-yellow-400">Car Name:</h3></div>
-                                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-green-200 pt-1 pb-1 rounded-full">{carName}</h3></div>
+                                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-yellow-200 pt-1 pb-1 rounded-full">{carName}</h3></div>
                                                 </div>
                                                 <div className="row mt-4">
                                                         <div className="col-md-3 mx-4"> <h3 className="fw-bold text-xl text-yellow-400">Car Model:</h3></div>
-                                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-green-200 pt-1 pb-1 rounded-full">{carModel}</h3></div>
+                                                        <div className="col-md-2 text-center"><h3 className="fw-bold text-xl bg-yellow-200 pt-1 pb-1 rounded-full">{carModel}</h3></div>
                                                 </div>
                                                 <div className="row mt-4">
                                                         <div className="col-md-3 mx-4"> <h3 className="fw-bold text-xl text-yellow-400">Palate Number:</h3></div>
-                                                        <div className="col-md-3 text-center"><h3 className="fw-bold text-xl bg-green-200 pt-1 pb-1 rounded-full">{palateNumber}</h3></div>
+                                                        <div className="col-md-3 text-center"><h3 className="fw-bold text-xl bg-yellow-200 pt-1 pb-1 rounded-full">{palateNumber}</h3></div>
                                                 </div>
                                         </div>
                                         :
