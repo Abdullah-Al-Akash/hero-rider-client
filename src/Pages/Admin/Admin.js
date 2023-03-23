@@ -4,6 +4,8 @@ import TableR from './TableR';
 import './Admin.css';
 
 const Admin = () => {
+        // Search List:
+        const [searchList, setSearchList] = useState([]);
         const [members] = Users()
         const [user, setUser] = useState([])
         const [pageCount, setPageCount] = useState(0);
@@ -15,15 +17,29 @@ const Admin = () => {
                         .then(data => {
                                 setUser(data);
                                 const count = members.length;
-                                console.log(count);
                                 const pages = Math.ceil(count / 10);
                                 setPageCount(pages);
                         })
-        }, [user]);
+        }, [user, searchList]);
+
+        const [searchField, setSearchField] = useState('');
+        const search = e => {
+                const searchText = e.target.value;
+                setSearchField(searchText)
+                const matchResult = user?.filter(info => info.name.toLowerCase().includes(searchText.toLowerCase()) || info.email.toLowerCase().includes(searchText.toLowerCase()) || info.phone.includes(searchText))
+                setSearchList(matchResult);
+        }
         return (
                 <div>
+
                         <div className="container mx-auto px-8 pt-4">
-                                <div className="overflow-x-auto">
+                                <div className="px-8 mx-auto pt-24">
+                                        <div className="pl-12 flex justify-center align-items-center pt-24">
+                                                <h4 className="text-white text-3xl fw-bold mr-4">Search Here</h4>
+                                                <input onChange={search} type="text" placeholder="Search" className="input input-bordered " />
+                                        </div>
+                                </div>
+                                <div className="overflow-x-auto mt-8">
                                         <table className="table w-full">
                                                 <thead>
                                                         <tr>
@@ -41,13 +57,21 @@ const Admin = () => {
 
                                                 <tbody>
                                                         {
-                                                                user?.map(member => <TableR
+                                                                searchField?.length ? searchList?.map(member => <TableR
                                                                         key={member._id}
                                                                         member={member}
 
                                                                 >
 
                                                                 </TableR>)
+                                                                        :
+                                                                        user?.map(member => <TableR
+                                                                                key={member._id}
+                                                                                member={member}
+
+                                                                        >
+
+                                                                        </TableR>)
                                                         }
                                                 </tbody>
                                         </table>
