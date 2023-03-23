@@ -33,8 +33,8 @@ const Admin = () => {
                 <div>
 
                         <div className="container mx-auto px-8 pt-4">
-                                <div className="px-8 mx-auto pt-24">
-                                        <div className="pl-12 flex justify-center align-items-center pt-24">
+                                <div className="px-8 mx-auto pt-12">
+                                        <div className="pl-12 flex justify-center align-items-center">
                                                 <h4 className="text-white text-3xl fw-bold mr-4">Search Here</h4>
                                                 <input onChange={search} type="text" placeholder="Search" className="input input-bordered " />
                                         </div>
