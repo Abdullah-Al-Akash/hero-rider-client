@@ -1,20 +1,24 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Admin from '../Admin/Admin';
+import CheckOutForm from '../CheckOutForm/CheckOutForm';
 import Users from '../hooks/Users';
 import './Profile.css'
-
+const stripePromise = loadStripe('pk_test_51If57xGFVg3TaXfKaayGBVRcIahQUEqnWSiSfjrzIj5Qa7yyvTsRHfRQjVh7oZea2PbVVU2uT7ox3Jn76aXxFWVA00Sac7CiDN');
 const Profile = () => {
+        const [pageCount, setPageCount] = useState(0);
+        const [currentPage, setCurrentPage] = useState(0);
+        const [size, setSize] = useState(10);
+
         const navigate = useNavigate();
         const [members, setMembers] = useState([])
         useEffect(() => {
-                fetch('http://localhost:5000/members', {
+                fetch(`http://localhost:5000/members`, {
                         method: 'GET'
                 })
                         .then(res => {
-                                // if (res.status === 401 || res.status === 403) {
-                                //         navigate('/');
-                                // }
                                 return res.json()
                         })
                         .then(data => {
@@ -152,7 +156,28 @@ const Profile = () => {
                                                                         </div>
                                                                 </div>
                                                                 :
-                                                                ''
+
+                                                                <div className="flex justify-center mt-8">
+                                                                        <div className="row">
+                                                                                <div className="w-96 col-md-6 card drop-shadow-xl bg-car p-8">
+                                                                                        <h3 className="fw-bold text-4xl text-yellow-500 text-center">Package-1</h3>
+                                                                                        <h3 className="fw-bold text-2xl text-center mt-8 text-white">For Car driving lessons </h3>
+                                                                                        <h3 className="fw-bold text-2xl text-center mt-2 text-white">$200 </h3>
+                                                                                        <Elements stripe={stripePromise}>
+                                                                                                <CheckOutForm />
+                                                                                        </Elements>
+                                                                                </div>
+                                                                                <div className="w-96 col-md-6 card drop-shadow-xl bg-bike p-8 ms-4">
+                                                                                        <h3 className="fw-bold text-4xl text-yellow-500 text-center">Package-2</h3>
+                                                                                        <h3 className="fw-bold text-2xl text-center mt-8 text-white">For Bike driving lessons </h3>
+                                                                                        <h3 className="fw-bold text-2xl text-center mt-2 text-white">$100 </h3>
+                                                                                        <Elements stripe={stripePromise}>
+                                                                                                <CheckOutForm />
+                                                                                        </Elements>
+                                                                                </div>
+                                                                        </div>
+
+                                                                </div>
                                                 }
                                         </div>
                                         :

@@ -6,3 +6,11 @@
               background-repeat: no-repeat;
               background-attachment: fixed;
 }
+.bg-car{
+  background:linear-gradient(0deg, rgba(56, 54, 54, 0.405), rgba(18, 17, 17, 0.882)), url(https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZHJpdmluZ3xlbnwwfHwwfHw%3D&w=1000&q=80);
+              background-size:cover;
+}
+.bg-bike{
+  background:linear-gradient(0deg, rgba(56, 54, 54, 0.405), rgba(18, 17, 17, 0.882)), url(https://dn3bmh8yk8vvw.cloudfront.net/BGzAwcw3NDtb_qbuIKG7qQO3dz4=/_25590.jpg);
+              background-size:cover;
+}

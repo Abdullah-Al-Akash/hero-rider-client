@@ -4,13 +4,19 @@ import TableR from './TableR';
 
 const Admin = () => {
         const [members, setMembers] = useState([])
+        const [pageCount, setPageCount] = useState(0);
+        const [currentPage, setCurrentPage] = useState(0);
+        const [size, setSize] = useState(10);
         useEffect(() => {
-                fetch('http://localhost:5000/members')
+                fetch(`http://localhost:5000/members?page=${currentPage}&size=${size}`)
                         .then(res => res.json())
                         .then(data => {
                                 setMembers(data);
+                                const count = data.count;
+                                const pages = Math.ceil(count / 10);
+                                setPageCount(pages);
                         })
-        }, [members])
+        }, [members]);
         return (
                 <div>
                         <div className="container mx-auto px-8 pt-4">

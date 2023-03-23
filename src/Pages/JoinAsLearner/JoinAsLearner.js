@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Users from '../hooks/Users';
 import './JoinAsLearner.css';
 
+
 const JoinAsLearner = () => {
+        const [members] = Users();
         const imageHostKey = '4183cea48c4e5701d0cdbb24c4c45488';
         // Handle Registration Form:
         const [passwordError, setPasswordError] = useState('');
@@ -31,13 +34,13 @@ const JoinAsLearner = () => {
                 let age = e.target.age.value;
                 let phone = e.target.phone.value;
                 let vehicle = carType;
-
+                const getAnotherAccount = members?.find(member => member?.email === email);
 
                 // Error Handling:
-                if (!/^[0-9]{6}$/.test(password)) {
-                        setPasswordError('Password Must be 6 digit number!')
-                        return;
-                }
+                // if (!/^[0-9]{8}$/.test(password)) {
+                //         setPasswordError('Password Must be 8 digit number!')
+                //         return;
+                // }
                 if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
                         setEmailError("Enter Valid Email!")
                         return;
@@ -46,59 +49,64 @@ const JoinAsLearner = () => {
                 if (password !== confirmPassword) {
                         return toast.error("Password didn't match");
                 }
+                // Check Already have an account or not:
+                if (getAnotherAccount) {
+                        return toast.warning('Already have an account by this email!');
+                }
+                else {
+                        const formData = new FormData();
 
-                const formData = new FormData();
-
-                formData.append('image', selectedFile);
-                const imgUrl = `https://api.imgbb.com/1/upload?expiration=10000&key=${imageHostKey}`
-                fetch(imgUrl, {
-                        method: 'POST',
-                        body: formData
-                })
-                        .then(res => res.json())
-                        .then(imgData => {
-                                setProfilePic(imgData?.data?.url);
-                                // console.log(imgData?.data?.url)
-                                const member = {
-                                        name: name,
-                                        email: email,
-                                        password: password,
-                                        age: age,
-                                        phone: phone,
-                                        vehicle: vehicle,
-                                        image: imgData?.data?.url,
-                                        profileType: 'learner',
-                                        carName: '',
-                                        carModel: '',
-                                        palateNumber: '',
-                                        role: 'member',
-                                        status: 'pending'
-                                }
-                                console.log(member);
-                                const url = 'http://localhost:5000/registration';
-                                fetch(url, {
-                                        method: "POST",
-                                        headers: {
-                                                "content-type": "application/json"
-                                        },
-                                        body: JSON.stringify(member)
-                                })
-                                        .then(res => res.json())
-                                        .then(result => {
-                                                console.log(result)
-                                                if (result.acknowledged) {
-
-                                                        toast.success("Registration Successfully Done!");
-                                                        localStorage.setItem('user', email);
-                                                        navigate('/profile');
-
-                                                }
-                                                else {
-                                                        toast("Something Went Wrong. Please ry again!")
-                                                }
-                                        })
-
+                        formData.append('image', selectedFile);
+                        const imgUrl = `https://api.imgbb.com/1/upload?expiration=10000&key=${imageHostKey}`
+                        fetch(imgUrl, {
+                                method: 'POST',
+                                body: formData
                         })
+                                .then(res => res.json())
+                                .then(imgData => {
+                                        setProfilePic(imgData?.data?.url);
+                                        // console.log(imgData?.data?.url)
+                                        const member = {
+                                                name: name,
+                                                email: email,
+                                                password: password,
+                                                age: age,
+                                                phone: phone,
+                                                vehicle: vehicle,
+                                                image: imgData?.data?.url,
+                                                profileType: 'learner',
+                                                carName: '',
+                                                carModel: '',
+                                                palateNumber: '',
+                                                role: 'member',
+                                                status: 'pending'
+                                        }
+                                        console.log(member);
+                                        const url = 'http://localhost:5000/registration';
+                                        fetch(url, {
+                                                method: "POST",
+                                                headers: {
+                                                        "content-type": "application/json"
+                                                },
+                                                body: JSON.stringify(member)
+                                        })
+                                                .then(res => res.json())
+                                                .then(result => {
+                                                        console.log(result)
+                                                        if (result.acknowledged) {
+
+                                                                toast.success("Registration Successfully Done!");
+                                                                localStorage.setItem('user', email);
+                                                                navigate('/profile');
+
+                                                        }
+                                                        else {
+                                                                toast("Something Went Wrong. Please ry again!")
+                                                        }
+                                                })
+
+                                })
+                }
 
 
                 setPasswordError('');

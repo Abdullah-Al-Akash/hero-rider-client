@@ -23,10 +23,10 @@ const Home = () => {
                 let password = e.target.password.value;
 
                 // Error Handling:
-                if (!/^[0-9]{6}$/.test(password)) {
-                        setPasswordError('Password Must be 6 digit number!')
-                        return;
-                }
+                // if (!/^[0-9]{6}$/.test(password)) {
+                //         setPasswordError('Password Must be 6 digit number!')
+                //         return;
+                // }
                 if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
                         setEmailError("Enter Valid Email!")
                         return;
