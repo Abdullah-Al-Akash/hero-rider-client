@@ -86,7 +86,7 @@ const JoinAsRider = () => {
                                                 role: 'member',
                                                 status: 'pending'
                                         }
-                                        const url = 'http://localhost:5000/registration';
+                                        const url = 'https://hero-rider-server-nine.vercel.app/registration';
                                         fetch(url, {
                                                 method: "POST",
                                                 headers: {

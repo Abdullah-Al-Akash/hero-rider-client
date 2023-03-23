@@ -15,7 +15,7 @@ const Profile = () => {
         const navigate = useNavigate();
         const [members, setMembers] = useState([])
         useEffect(() => {
-                fetch(`http://localhost:5000/members`, {
+                fetch(`https://hero-rider-server-nine.vercel.app/members`, {
                         method: 'GET'
                 })
                         .then(res => {

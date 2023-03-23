@@ -8,7 +8,7 @@ const Admin = () => {
         const [currentPage, setCurrentPage] = useState(0);
         const [size, setSize] = useState(10);
         useEffect(() => {
-                fetch(`http://localhost:5000/members?page=${currentPage}&size=${size}`)
+                fetch(`https://hero-rider-server-nine.vercel.app/members?page=${currentPage}&size=${size}`)
                         .then(res => res.json())
                         .then(data => {
                                 setMembers(data);

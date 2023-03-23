@@ -8,7 +8,7 @@ const Users = () => {
         const active = handleActive;
         const navigate = useNavigate()
         useEffect(() => {
-                fetch('http://localhost:5000/members', {
+                fetch('https://hero-rider-server-nine.vercel.app/members', {
                         method: 'GET'
                 })
                         .then(res => {

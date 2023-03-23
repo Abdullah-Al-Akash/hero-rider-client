@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 const handleActive = (id, member) => {
-        const url = `http://localhost:5000/member/${id}`;
+        const url = `https://hero-rider-server-nine.vercel.app/member/${id}`;
         fetch(url, {
                 method: 'PUT',
                 headers: {

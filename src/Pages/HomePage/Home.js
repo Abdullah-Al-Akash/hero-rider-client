@@ -32,7 +32,7 @@ const Home = () => {
                         return;
                 }
 
-                fetch('http://localhost:5000/login', {
+                fetch('https://hero-rider-server-nine.vercel.app/login', {
                         method: 'POST',
                         headers: {
                                 'content-type': 'application/json'
