@@ -8,7 +8,6 @@ const Home = () => {
         const [members] = Users();
         const navigate = useNavigate();
         const currentUser = localStorage.getItem('user');
-        console.log(currentUser);
         useEffect(() => {
                 if (currentUser) {
                         navigate('/profile')
@@ -59,16 +58,11 @@ const Home = () => {
                 setEmailError('')
         }
 
-        // Navigate To Register:
-        const navigateToRegister = () => {
-                navigate('/registration')
-        }
-
         return (
                 <div className="main-bg h-screen flex justify-content-center align-items-center">
                         <div className="flex-initial w-50">
                                 <div className="flex justify-center items-center h-screen">
-                                        <div className="card w-96 bg-base-100 shadow-xl">
+                                        <div className="card w-96 bg-base-100 shadow-xl pb-8 pt-8">
                                                 <div className="card-body">
                                                         <h2 className="text-center font-bold text-2xl">Please Login!</h2>
                                                         <div>
@@ -83,12 +77,6 @@ const Home = () => {
                                                                 <input type="submit" value="Login" className="btn input-bordered btn-success bg-black text-white fw-bold w-full max-w-xs mt-4" />
                                                                 <h3 className="text-red-600 pl-2">{userNotFound ? userNotFound : ''}</h3>
                                                         </form>
-                                                </div>
-                                                <div className="pl-8 pb-12">
-                                                        <h3>Not have any account? Please <span
-                                                                onClick={() => navigateToRegister()}
-                                                                className="text-orange-700 font-bold cursor-pointer"
-                                                        >Register Here!</span></h3>
                                                 </div>
                                         </div>
                                 </div>

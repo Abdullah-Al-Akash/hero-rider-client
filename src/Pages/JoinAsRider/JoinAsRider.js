@@ -53,7 +53,7 @@ const JoinAsRider = () => {
                 const formData = new FormData();
 
                 formData.append('image', selectedFile);
-                const imgUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`
+                const imgUrl = `https://api.imgbb.com/1/upload?expiration=10000&key=${imageHostKey}`
                 fetch(imgUrl, {
                         method: 'POST',
                         body: formData
@@ -73,7 +73,9 @@ const JoinAsRider = () => {
                                         profileType: 'rider',
                                         carName: carName,
                                         carModel: carModel,
-                                        palateNumber: palateNumber
+                                        palateNumber: palateNumber,
+                                        role: 'member',
+                                        status: 'pending'
                                 }
                                 console.log(member);
                                 const url = 'http://localhost:5000/registration';
@@ -98,7 +100,6 @@ const JoinAsRider = () => {
                                                         toast("Something Went Wrong. Please ry again!")
                                                 }
                                         })
-
                         })
 
 

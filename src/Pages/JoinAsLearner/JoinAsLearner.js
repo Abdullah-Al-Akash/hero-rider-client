@@ -50,7 +50,7 @@ const JoinAsLearner = () => {
                 const formData = new FormData();
 
                 formData.append('image', selectedFile);
-                const imgUrl = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`
+                const imgUrl = `https://api.imgbb.com/1/upload?expiration=10000&key=${imageHostKey}`
                 fetch(imgUrl, {
                         method: 'POST',
                         body: formData
@@ -70,7 +70,9 @@ const JoinAsLearner = () => {
                                         profileType: 'learner',
                                         carName: '',
                                         carModel: '',
-                                        palateNumber: ''
+                                        palateNumber: '',
+                                        role: 'member',
+                                        status: 'pending'
                                 }
                                 console.log(member);
                                 const url = 'http://localhost:5000/registration';

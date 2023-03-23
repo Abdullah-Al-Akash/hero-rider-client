@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import handleActive from './Active';
 
 const Users = () => {
         const [members, setMembers] = useState([]);
+        // Handle Active:
+        const active = handleActive;
         const navigate = useNavigate()
         useEffect(() => {
                 fetch('http://localhost:5000/members', {
@@ -18,7 +21,7 @@ const Users = () => {
                                 setMembers(data)
                         })
         }, [])
-        return [members];
+        return [members, active];
 };
 
 export default Users;
